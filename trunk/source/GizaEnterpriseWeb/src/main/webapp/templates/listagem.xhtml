@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+
+    <h:body>
+        <p:panel id="pnlFiltros" header="Filtros" toggleable="true" closable="false"
+                 toggleSpeed="200" widgetVar="panelFiltros">
+            <ui:insert name="filtros">
+            </ui:insert>
+        </p:panel>
+
+        <p:panel id="pnlControles" toggleable="true" closable="false"
+                 toggleSpeed="200" widgetVar="panelControles">
+            <ui:insert name="controles">
+            </ui:insert>
+        </p:panel>
+
+        <p:panel id="pnlListagem" header="Resultados" toggleable="true" closable="false"
+                 toggleSpeed="200" widgetVar="panelListagem" style="height: 100%">
+            <ui:insert name="listagem">
+            </ui:insert>
+        </p:panel>
+
+    </h:body>
+
+</html>

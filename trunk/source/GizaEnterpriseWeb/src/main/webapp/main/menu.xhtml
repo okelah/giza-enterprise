@@ -1,0 +1,30 @@
+<ui:fragment
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.prime.com.tr/ui">
+    <h:form>
+
+        <p:accordionPanel activeIndex="0" autoHeight="false">
+            <p:tab title="Cadastro">
+                <p:menu>
+                    <p:submenu label="Auxiliar">
+                        <p:menuitem action="/pages/pais/listagem" value="#{bundle.menu_pais}" ajax="false"/>
+                        <p:menuitem action="/pages/estado/List" value="#{bundle.menu_estado}" ajax="false"/>
+                        <p:menuitem action="/pages/municipio/List" value="#{bundle.menu_municipio}" ajax="false"/>
+                    </p:submenu>
+                </p:menu>
+            </p:tab>
+
+            <p:tab title="Configuracao">
+                <h:outputText value="Menu 2 Content" />
+            </p:tab>
+
+            <p:tab title="Menu 3">
+                <h:outputText value="Menu 3 Content" />
+            </p:tab>
+        </p:accordionPanel>
+
+    </h:form>
+</ui:fragment>

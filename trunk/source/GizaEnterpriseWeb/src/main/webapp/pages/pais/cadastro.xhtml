@@ -1,0 +1,50 @@
+<ui:composition template="../../templates/main.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.prime.com.tr/ui">
+    <ui:define name="principal">
+        <h:form>
+            <ui:decorate template="../../templates/cadastro.xhtml">
+                <ui:define name="cadastro">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.CreatePaisLabel_nome}" for="nome" />
+                        <p:inputText id="nome"
+                                     value="#{paisController.selected.nome}"
+                                     title="#{bundle.CreatePaisTitle_nome}"
+                                     required="true"
+                                     requiredMessage="#{bundle.CreatePaisRequiredMessage_nome}" />
+
+                        <h:outputLabel value="#{bundle.CreatePaisLabel_sigla}" for="sigla" />
+                        <p:inputMask id="sigla"
+                                     value="#{paisController.selected.sigla}"
+                                     title="#{bundle.CreatePaisTitle_sigla}"
+                                     mask="aaa"/>
+
+                        <h:outputLabel value="#{bundle.CreatePaisLabel_ativo}" for="ativo" />
+                        <h:selectBooleanCheckbox id="ativo"
+                                                 value="#{paisController.selected.ativo}"
+                                                 title="#{bundle.CreatePaisTitle_ativo}"
+                                                 required="true"
+                                                 requiredMessage="#{bundle.CreatePaisRequiredMessage_ativo}"/>
+                    </h:panelGrid>
+                </ui:define>
+
+                <ui:define name="controles">
+                    <p:toolbar>
+                        <p:toolbarGroup align="left">
+                            <p:commandButton image="ui-icon-disk" ajax="false"
+                                             action="#{paisController.create}"
+                                             value="#{bundle.CreatePaisSaveLink}"/>
+
+                            <p:commandButton ajax="false"
+                                             action="#{paisController.prepareList}"
+                                             value="#{bundle.CreatePaisShowAllLink}"
+                                             immediate="true"/>
+                        </p:toolbarGroup>
+                    </p:toolbar>
+                </ui:define>
+            </ui:decorate>
+        </h:form>
+    </ui:define>
+</ui:composition>

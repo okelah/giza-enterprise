@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPaisTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPaisLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{paisController.selected.id}" title="#{bundle.EditPaisTitle_id}" required="true" requiredMessage="#{bundle.EditPaisRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditPaisLabel_ativo}" for="ativo" />
+                    <h:inputText id="ativo" value="#{paisController.selected.ativo}" title="#{bundle.EditPaisTitle_ativo}" required="true" requiredMessage="#{bundle.EditPaisRequiredMessage_ativo}"/>
+                    <h:outputLabel value="#{bundle.EditPaisLabel_nome}" for="nome" />
+                    <h:inputText id="nome" value="#{paisController.selected.nome}" title="#{bundle.EditPaisTitle_nome}" required="true" requiredMessage="#{bundle.EditPaisRequiredMessage_nome}"/>
+                    <h:outputLabel value="#{bundle.EditPaisLabel_sigla}" for="sigla" />
+                    <h:inputText id="sigla" value="#{paisController.selected.sigla}" title="#{bundle.EditPaisTitle_sigla}" />
+                </h:panelGrid>
+                <h:commandLink action="#{paisController.update}" value="#{bundle.EditPaisSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditPaisViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{paisController.prepareList}" value="#{bundle.EditPaisShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditPaisIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
