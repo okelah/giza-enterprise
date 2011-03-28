@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="pages/municipio/Create.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="main/principal.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="pages/pais/Create.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="pages/estado/View.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="templates/listagem.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="template.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="pages/pais/View.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="templates/main.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="pages/pais/List.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="pages/municipio/Edit.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="pages/pais/Edit.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="pages/municipio/View.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="pages/estado/List.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="pages/municipio/List.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="index.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="main/menu.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="pages/pais/listagem.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="main/cabecalho.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="pages/estado/Edit.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="pages/estado/Create.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="templates/cadastro.xhtml" x="1400" y="150" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

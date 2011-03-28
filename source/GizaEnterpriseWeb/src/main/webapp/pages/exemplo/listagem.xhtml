@@ -1,0 +1,60 @@
+<ui:composition template="../../templates/main.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.prime.com.tr/ui">
+    <ui:define name="principal">
+        <h:form>
+            <ui:decorate template="../../templates/listagem.xhtml">
+                <ui:define name="filtros">
+                    <h:outputText value="Aqui vem os filtros."/>
+                </ui:define>
+
+                <ui:define name="controles">
+                    <p:toolbar>  
+                        <p:toolbarGroup align="left">  
+                            <p:commandButton image="ui-icon-document" ajax="false"
+                                             action="#{paisController.prepareCreate}" value="#{bundle.ListPaisCreateLink}"/>
+
+                            <p:commandButton type="push" value="Open" image="ui-icon-folder-open"/>  
+                        </p:toolbarGroup>
+                    </p:toolbar>
+                </ui:define>
+
+                <ui:define name="listagem">
+
+                    <p:dataTable id="tblPais" value="#{paisController.paisDataModel}" var="item"
+                                 paginator="true" rows="10" lazy="true" >
+                        <p:column sortBy="#{item.id}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPaisTitle_id}" />
+                            </f:facet>
+                            <h:outputText value="#{item.id}" />
+                        </p:column>
+
+                        <p:column sortBy="#{item.nome}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPaisTitle_nome}" />
+                            </f:facet>
+                            <h:outputText value="#{item.nome}" />
+                        </p:column>
+
+                        <p:column sortBy="#{item.sigla}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPaisTitle_sigla}" />
+                            </f:facet>
+                            <h:outputText value="#{item.sigla}" />
+                        </p:column>
+
+                        <p:column sortBy="#{item.ativo}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPaisTitle_ativo}" />
+                            </f:facet>
+                            <h:selectBooleanCheckbox value="#{item.ativo}" readonly="true" disabled="true"/>
+                        </p:column>
+                    </p:dataTable>
+                </ui:define>
+            </ui:decorate>
+        </h:form>
+    </ui:define>
+</ui:composition>

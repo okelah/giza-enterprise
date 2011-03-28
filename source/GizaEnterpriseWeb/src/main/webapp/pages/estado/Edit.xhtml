@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditEstadoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditEstadoLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{estadoController.selected.id}" title="#{bundle.EditEstadoTitle_id}" required="true" requiredMessage="#{bundle.EditEstadoRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditEstadoLabel_ativo}" for="ativo" />
+                    <h:inputText id="ativo" value="#{estadoController.selected.ativo}" title="#{bundle.EditEstadoTitle_ativo}" required="true" requiredMessage="#{bundle.EditEstadoRequiredMessage_ativo}"/>
+                    <h:outputLabel value="#{bundle.EditEstadoLabel_nome}" for="nome" />
+                    <h:inputText id="nome" value="#{estadoController.selected.nome}" title="#{bundle.EditEstadoTitle_nome}" required="true" requiredMessage="#{bundle.EditEstadoRequiredMessage_nome}"/>
+                    <h:outputLabel value="#{bundle.EditEstadoLabel_sigla}" for="sigla" />
+                    <h:inputText id="sigla" value="#{estadoController.selected.sigla}" title="#{bundle.EditEstadoTitle_sigla}" required="true" requiredMessage="#{bundle.EditEstadoRequiredMessage_sigla}"/>
+                    <h:outputLabel value="#{bundle.EditEstadoLabel_pais}" for="pais" />
+                    <h:selectOneMenu id="pais" value="#{estadoController.selected.pais}" title="#{bundle.EditEstadoTitle_pais}" required="true" requiredMessage="#{bundle.EditEstadoRequiredMessage_pais}">
+                        <f:selectItems value="#{paisController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{estadoController.update}" value="#{bundle.EditEstadoSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditEstadoViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{estadoController.prepareList}" value="#{bundle.EditEstadoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditEstadoIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
