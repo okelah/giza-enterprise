@@ -1,21 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.heldersa.giza.entity;
 
-import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -25,28 +14,12 @@ import javax.persistence.UniqueConstraint;
  * @author Administrador
  */
 @Entity
-@Table(name = "tipo_endereco", catalog = "giza", schema = "", uniqueConstraints = {
+@Table(name = "tipo_endereco", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"abreviacao"}),
     @UniqueConstraint(columnNames = {"descricao"})})
-@NamedQueries({
-    @NamedQuery(name = "TipoEndereco.findAll", query = "SELECT t FROM TipoEndereco t"),
-    @NamedQuery(name = "TipoEndereco.findById", query = "SELECT t FROM TipoEndereco t WHERE t.id = :id"),
-    @NamedQuery(name = "TipoEndereco.findByAtivo", query = "SELECT t FROM TipoEndereco t WHERE t.ativo = :ativo"),
-    @NamedQuery(name = "TipoEndereco.findByDescricao", query = "SELECT t FROM TipoEndereco t WHERE t.descricao = :descricao"),
-    @NamedQuery(name = "TipoEndereco.findByAbreviacao", query = "SELECT t FROM TipoEndereco t WHERE t.abreviacao = :abreviacao")})
-public class TipoEndereco implements Serializable {
+public class TipoEndereco extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Basic(optional = false)
-    @Column(name = "ativo", nullable = false)
-    private boolean ativo;
 
     @Basic(optional = false)
     @Column(name = "descricao", nullable = false, length = 255)
@@ -69,22 +42,6 @@ public class TipoEndereco implements Serializable {
         this.id = id;
         this.ativo = ativo;
         this.descricao = descricao;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
     }
 
     public String getDescricao() {
@@ -129,11 +86,6 @@ public class TipoEndereco implements Serializable {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "br.com.heldersa.giza.entity.TipoEndereco[id=" + id + "]";
     }
 
 }
