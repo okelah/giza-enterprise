@@ -1,21 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.heldersa.giza.entity;
 
-import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -24,27 +13,17 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "endereco")
-@NamedQueries({
-    @NamedQuery(name = "Endereco.findAll", query = "SELECT e FROM Endereco e"),
-    @NamedQuery(name = "Endereco.findById", query = "SELECT e FROM Endereco e WHERE e.id = :id"),
-    @NamedQuery(name = "Endereco.findByAtivo", query = "SELECT e FROM Endereco e WHERE e.ativo = :ativo"),
-    @NamedQuery(name = "Endereco.findByLogradouro", query = "SELECT e FROM Endereco e WHERE e.logradouro = :logradouro"),
-    @NamedQuery(name = "Endereco.findByComplemento", query = "SELECT e FROM Endereco e WHERE e.complemento = :complemento"),
-    @NamedQuery(name = "Endereco.findByBairro", query = "SELECT e FROM Endereco e WHERE e.bairro = :bairro"),
-    @NamedQuery(name = "Endereco.findByCep", query = "SELECT e FROM Endereco e WHERE e.cep = :cep")})
-public class Endereco implements Serializable {
+public class Endereco extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @JoinColumn(name = "tipo_endereco_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+    private TipoEndereco tipoEndereco;
 
-    @Basic(optional = false)
-    @Column(name = "ativo", nullable = false)
-    private boolean ativo;
+    @JoinColumn(name = "tipo_logradouro_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+    private TipoLogradouro tipoLogradouro;
 
     @Basic(optional = false)
     @Column(name = "logradouro", nullable = false, length = 255)
@@ -61,15 +40,7 @@ public class Endereco implements Serializable {
 
     @JoinColumn(name = "municipio_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Municipio municipioId;
-
-    @JoinColumn(name = "tipo_logradouro_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private TipoLogradouro tipoLogradouroId;
-
-    @JoinColumn(name = "tipo_endereco_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private TipoEndereco tipoEnderecoId;
+    private Municipio municipio;
 
     public Endereco() {
     }
@@ -82,22 +53,6 @@ public class Endereco implements Serializable {
         this.id = id;
         this.ativo = ativo;
         this.logradouro = logradouro;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
     }
 
     public String getLogradouro() {
@@ -132,28 +87,28 @@ public class Endereco implements Serializable {
         this.cep = cep;
     }
 
-    public Municipio getMunicipioId() {
-        return municipioId;
+    public Municipio getMunicipio() {
+        return municipio;
     }
 
-    public void setMunicipioId(Municipio municipioId) {
-        this.municipioId = municipioId;
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
     }
 
-    public TipoLogradouro getTipoLogradouroId() {
-        return tipoLogradouroId;
+    public TipoLogradouro getTipoLogradouro() {
+        return tipoLogradouro;
     }
 
-    public void setTipoLogradouroId(TipoLogradouro tipoLogradouroId) {
-        this.tipoLogradouroId = tipoLogradouroId;
+    public void setTipoLogradouro(TipoLogradouro tipoLogradouro) {
+        this.tipoLogradouro = tipoLogradouro;
     }
 
-    public TipoEndereco getTipoEnderecoId() {
-        return tipoEnderecoId;
+    public TipoEndereco getTipoEndereco() {
+        return tipoEndereco;
     }
 
-    public void setTipoEnderecoId(TipoEndereco tipoEnderecoId) {
-        this.tipoEnderecoId = tipoEnderecoId;
+    public void setTipoEndereco(TipoEndereco tipoEndereco) {
+        this.tipoEndereco = tipoEndereco;
     }
 
     @Override
@@ -174,11 +129,6 @@ public class Endereco implements Serializable {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "br.com.heldersa.giza.entity.Endereco[id=" + id + "]";
     }
 
 }

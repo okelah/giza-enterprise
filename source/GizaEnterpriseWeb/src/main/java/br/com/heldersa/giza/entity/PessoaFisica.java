@@ -5,16 +5,13 @@
 
 package br.com.heldersa.giza.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -29,23 +26,10 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "pessoa_fisica", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"rg_id"}),
     @UniqueConstraint(columnNames = {"cpf"})})
-@NamedQueries({
-    @NamedQuery(name = "PessoaFisica.findAll", query = "SELECT p FROM PessoaFisica p"),
-    @NamedQuery(name = "PessoaFisica.findById", query = "SELECT p FROM PessoaFisica p WHERE p.id = :id"),
-    @NamedQuery(name = "PessoaFisica.findByNome", query = "SELECT p FROM PessoaFisica p WHERE p.nome = :nome"),
-    @NamedQuery(name = "PessoaFisica.findByCpf", query = "SELECT p FROM PessoaFisica p WHERE p.cpf = :cpf"),
-    @NamedQuery(name = "PessoaFisica.findByDataNascimento", query = "SELECT p FROM PessoaFisica p WHERE p.dataNascimento = :dataNascimento"),
-    @NamedQuery(name = "PessoaFisica.findByFiliacaoPai", query = "SELECT p FROM PessoaFisica p WHERE p.filiacaoPai = :filiacaoPai"),
-    @NamedQuery(name = "PessoaFisica.findByFiliacaoMae", query = "SELECT p FROM PessoaFisica p WHERE p.filiacaoMae = :filiacaoMae"),
-    @NamedQuery(name = "PessoaFisica.findBySexo", query = "SELECT p FROM PessoaFisica p WHERE p.sexo = :sexo")})
-public class PessoaFisica implements Serializable {
+@DiscriminatorValue(value="PF")
+public class PessoaFisica extends Pessoa {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Long id;
 
     @Basic(optional = false)
     @Column(name = "nome", nullable = false, length = 255)
@@ -71,19 +55,15 @@ public class PessoaFisica implements Serializable {
 
     @JoinColumn(name = "naturalidade_id", referencedColumnName = "id")
     @ManyToOne
-    private Municipio naturalidadeId;
+    private Municipio naturalidade;
 
     @JoinColumn(name = "estado_civil_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private EstadoCivil estadoCivilId;
+    private EstadoCivil estadoCivil;
 
     @JoinColumn(name = "rg_id", referencedColumnName = "id", nullable = false)
     @OneToOne(optional = false)
-    private Rg rgId;
-
-    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Pessoa pessoa;
+    private Rg rg;
 
     public PessoaFisica() {
     }
@@ -97,14 +77,6 @@ public class PessoaFisica implements Serializable {
         this.nome = nome;
         this.cpf = cpf;
         this.sexo = sexo;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -155,36 +127,28 @@ public class PessoaFisica implements Serializable {
         this.sexo = sexo;
     }
 
-    public Municipio getNaturalidadeId() {
-        return naturalidadeId;
+    public Municipio getNaturalidade() {
+        return naturalidade;
     }
 
-    public void setNaturalidadeId(Municipio naturalidadeId) {
-        this.naturalidadeId = naturalidadeId;
+    public void setNaturalidade(Municipio naturalidade) {
+        this.naturalidade = naturalidade;
     }
 
-    public EstadoCivil getEstadoCivilId() {
-        return estadoCivilId;
+    public EstadoCivil getEstadoCivil() {
+        return estadoCivil;
     }
 
-    public void setEstadoCivilId(EstadoCivil estadoCivilId) {
-        this.estadoCivilId = estadoCivilId;
+    public void setEstadoCivil(EstadoCivil estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
 
-    public Rg getRgId() {
-        return rgId;
+    public Rg getRg() {
+        return rg;
     }
 
-    public void setRgId(Rg rgId) {
-        this.rgId = rgId;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setRg(Rg rg) {
+        this.rg = rg;
     }
 
     @Override
@@ -205,11 +169,6 @@ public class PessoaFisica implements Serializable {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "br.com.heldersa.giza.entity.PessoaFisica[id=" + id + "]";
     }
 
 }
