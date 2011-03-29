@@ -2,46 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.heldersa.giza.entity;
 
-import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 /**
  *
  * @author Administrador
  */
-@Entity
-@Table(name = "pessoa", catalog = "giza", schema = "")
-@NamedQueries({
-    @NamedQuery(name = "Pessoa.findAll", query = "SELECT p FROM Pessoa p"),
-    @NamedQuery(name = "Pessoa.findById", query = "SELECT p FROM Pessoa p WHERE p.id = :id"),
-    @NamedQuery(name = "Pessoa.findByAtivo", query = "SELECT p FROM Pessoa p WHERE p.ativo = :ativo"),
-    @NamedQuery(name = "Pessoa.findByTipo", query = "SELECT p FROM Pessoa p WHERE p.tipo = :tipo")})
-public class Pessoa implements Serializable {
+@MappedSuperclass
+public class Pessoa extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Basic(optional = false)
-    @Column(name = "ativo", nullable = false)
-    private boolean ativo;
 
     @Basic(optional = false)
     @Column(name = "tipo", nullable = false, length = 2)
@@ -52,7 +28,7 @@ public class Pessoa implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa")
     private PessoaJuridica pessoaJuridica;
-
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaId")
     private Cliente cliente;
 
@@ -67,22 +43,6 @@ public class Pessoa implements Serializable {
         this.id = id;
         this.ativo = ativo;
         this.tipo = tipo;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
     }
 
     public String getTipo() {
@@ -136,10 +96,4 @@ public class Pessoa implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "br.com.heldersa.giza.entity.Pessoa[id=" + id + "]";
-    }
-
 }
