@@ -1,21 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.heldersa.giza.entity;
 
-import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -24,29 +11,15 @@ import javax.persistence.UniqueConstraint;
  * @author Administrador
  */
 @Entity
-@Table(name = "produto_cor", catalog = "giza", schema = "", uniqueConstraints = {
+@Table(name = "produto_cor", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"cor_id", "produto_id"})})
-@NamedQueries({
-    @NamedQuery(name = "ProdutoCor.findAll", query = "SELECT p FROM ProdutoCor p"),
-    @NamedQuery(name = "ProdutoCor.findById", query = "SELECT p FROM ProdutoCor p WHERE p.id = :id"),
-    @NamedQuery(name = "ProdutoCor.findByAtivo", query = "SELECT p FROM ProdutoCor p WHERE p.ativo = :ativo")})
-public class ProdutoCor implements Serializable {
+public class ProdutoCor extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Basic(optional = false)
-    @Column(name = "ativo", nullable = false)
-    private boolean ativo;
-
     @JoinColumn(name = "produto_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Produto produtoId;
+    private Produto produto;
 
     @JoinColumn(name = "cor_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
@@ -64,28 +37,12 @@ public class ProdutoCor implements Serializable {
         this.ativo = ativo;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
-
     public Produto getProdutoId() {
-        return produtoId;
+        return produto;
     }
 
     public void setProdutoId(Produto produtoId) {
-        this.produtoId = produtoId;
+        this.produto = produtoId;
     }
 
     public Cor getCorId() {
@@ -114,11 +71,6 @@ public class ProdutoCor implements Serializable {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "br.com.heldersa.giza.entity.ProdutoCor[id=" + id + "]";
     }
 
 }

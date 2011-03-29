@@ -22,7 +22,7 @@ import javax.persistence.UniqueConstraint;
  * @author Administrador
  */
 @Entity
-@Table(name = "pessoa_juridica", catalog = "giza", schema = "", uniqueConstraints = {
+@Table(name = "pessoa_juridica", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"cnpj"})})
 @NamedQueries({
     @NamedQuery(name = "PessoaJuridica.findAll", query = "SELECT p FROM PessoaJuridica p"),

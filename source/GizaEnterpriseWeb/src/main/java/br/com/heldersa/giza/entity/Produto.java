@@ -1,24 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.heldersa.giza.entity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -28,31 +17,12 @@ import javax.persistence.UniqueConstraint;
  * @author Administrador
  */
 @Entity
-@Table(name = "produto", catalog = "giza", schema = "", uniqueConstraints = {
+@Table(name = "produto", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"referencia"}),
     @UniqueConstraint(columnNames = {"descricao"})})
-@NamedQueries({
-    @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p"),
-    @NamedQuery(name = "Produto.findById", query = "SELECT p FROM Produto p WHERE p.id = :id"),
-    @NamedQuery(name = "Produto.findByAtivo", query = "SELECT p FROM Produto p WHERE p.ativo = :ativo"),
-    @NamedQuery(name = "Produto.findByDescricao", query = "SELECT p FROM Produto p WHERE p.descricao = :descricao"),
-    @NamedQuery(name = "Produto.findByReferencia", query = "SELECT p FROM Produto p WHERE p.referencia = :referencia"),
-    @NamedQuery(name = "Produto.findByGenero", query = "SELECT p FROM Produto p WHERE p.genero = :genero"),
-    @NamedQuery(name = "Produto.findByFaixaEtaria", query = "SELECT p FROM Produto p WHERE p.faixaEtaria = :faixaEtaria"),
-    @NamedQuery(name = "Produto.findByDescontoMaximo", query = "SELECT p FROM Produto p WHERE p.descontoMaximo = :descontoMaximo")})
-public class Produto implements Serializable {
+public class Produto extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Basic(optional = false)
-    @Column(name = "ativo", nullable = false)
-    private boolean ativo;
 
     @Basic(optional = false)
     @Column(name = "descricao", nullable = false, length = 255)
@@ -77,11 +47,11 @@ public class Produto implements Serializable {
 
     @JoinColumn(name = "tipo_produto_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private TipoProduto tipoProdutoId;
+    private TipoProduto tipoProduto;
 
     @JoinColumn(name = "fabricante_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Fabricante fabricanteId;
+    private Fabricante fabricante;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
     private Collection<ProdutoValor> produtoValorCollection;
@@ -99,22 +69,6 @@ public class Produto implements Serializable {
         this.descricao = descricao;
         this.genero = genero;
         this.descontoMaximo = descontoMaximo;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
     }
 
     public String getDescricao() {
@@ -165,20 +119,20 @@ public class Produto implements Serializable {
         this.produtoCorCollection = produtoCorCollection;
     }
 
-    public TipoProduto getTipoProdutoId() {
-        return tipoProdutoId;
+    public TipoProduto getTipoProduto() {
+        return tipoProduto;
     }
 
-    public void setTipoProdutoId(TipoProduto tipoProdutoId) {
-        this.tipoProdutoId = tipoProdutoId;
+    public void setTipoProduto(TipoProduto tipoProduto) {
+        this.tipoProduto = tipoProduto;
     }
 
-    public Fabricante getFabricanteId() {
-        return fabricanteId;
+    public Fabricante getFabricante() {
+        return fabricante;
     }
 
-    public void setFabricanteId(Fabricante fabricanteId) {
-        this.fabricanteId = fabricanteId;
+    public void setFabricante(Fabricante fabricanted) {
+        this.fabricante = fabricante;
     }
 
     public Collection<ProdutoValor> getProdutoValorCollection() {
@@ -207,11 +161,6 @@ public class Produto implements Serializable {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "br.com.heldersa.giza.entity.Produto[id=" + id + "]";
     }
 
 }
