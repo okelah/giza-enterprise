@@ -1,22 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.heldersa.giza.entity;
 
-import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -25,33 +11,15 @@ import javax.persistence.UniqueConstraint;
  * @author Administrador
  */
 @Entity
-@Table(name = "estado_civil", catalog = "giza", schema = "", uniqueConstraints = {
+@Table(name = "estado_civil", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"descricao"})})
-@NamedQueries({
-    @NamedQuery(name = "EstadoCivil.findAll", query = "SELECT e FROM EstadoCivil e"),
-    @NamedQuery(name = "EstadoCivil.findById", query = "SELECT e FROM EstadoCivil e WHERE e.id = :id"),
-    @NamedQuery(name = "EstadoCivil.findByAtivo", query = "SELECT e FROM EstadoCivil e WHERE e.ativo = :ativo"),
-    @NamedQuery(name = "EstadoCivil.findByDescricao", query = "SELECT e FROM EstadoCivil e WHERE e.descricao = :descricao")})
-public class EstadoCivil implements Serializable {
+public class EstadoCivil extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Basic(optional = false)
-    @Column(name = "ativo", nullable = false)
-    private boolean ativo;
 
     @Basic(optional = false)
     @Column(name = "descricao", nullable = false, length = 255)
     private String descricao;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoCivilId")
-    private Collection<PessoaFisica> pessoaFisicaCollection;
 
     public EstadoCivil() {
     }
@@ -66,36 +34,12 @@ public class EstadoCivil implements Serializable {
         this.descricao = descricao;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
-
     public String getDescricao() {
         return descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public Collection<PessoaFisica> getPessoaFisicaCollection() {
-        return pessoaFisicaCollection;
-    }
-
-    public void setPessoaFisicaCollection(Collection<PessoaFisica> pessoaFisicaCollection) {
-        this.pessoaFisicaCollection = pessoaFisicaCollection;
     }
 
     @Override
@@ -116,11 +60,6 @@ public class EstadoCivil implements Serializable {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "br.com.heldersa.giza.entity.EstadoCivil[id=" + id + "]";
     }
 
 }

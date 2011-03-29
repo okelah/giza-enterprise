@@ -26,7 +26,7 @@ import javax.persistence.UniqueConstraint;
  * @author Administrador
  */
 @Entity
-@Table(name = "pessoa_fisica", catalog = "giza", schema = "", uniqueConstraints = {
+@Table(name = "pessoa_fisica", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"rg_id"}),
     @UniqueConstraint(columnNames = {"cpf"})})
 @NamedQueries({

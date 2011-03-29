@@ -1,21 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.heldersa.giza.entity;
 
-import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -25,28 +14,12 @@ import javax.persistence.UniqueConstraint;
  * @author Administrador
  */
 @Entity
-@Table(name = "orgao_emissor", catalog = "giza", schema = "", uniqueConstraints = {
+@Table(name = "orgao_emissor", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"sigla"}),
     @UniqueConstraint(columnNames = {"nome"})})
-@NamedQueries({
-    @NamedQuery(name = "OrgaoEmissor.findAll", query = "SELECT o FROM OrgaoEmissor o"),
-    @NamedQuery(name = "OrgaoEmissor.findById", query = "SELECT o FROM OrgaoEmissor o WHERE o.id = :id"),
-    @NamedQuery(name = "OrgaoEmissor.findByAtivo", query = "SELECT o FROM OrgaoEmissor o WHERE o.ativo = :ativo"),
-    @NamedQuery(name = "OrgaoEmissor.findByNome", query = "SELECT o FROM OrgaoEmissor o WHERE o.nome = :nome"),
-    @NamedQuery(name = "OrgaoEmissor.findBySigla", query = "SELECT o FROM OrgaoEmissor o WHERE o.sigla = :sigla")})
-public class OrgaoEmissor implements Serializable {
+public class OrgaoEmissor extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Basic(optional = false)
-    @Column(name = "ativo", nullable = false)
-    private boolean ativo;
 
     @Basic(optional = false)
     @Column(name = "nome", nullable = false, length = 255)
@@ -71,22 +44,6 @@ public class OrgaoEmissor implements Serializable {
         this.ativo = ativo;
         this.nome = nome;
         this.sigla = sigla;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
     }
 
     public String getNome() {
@@ -132,10 +89,4 @@ public class OrgaoEmissor implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "br.com.heldersa.giza.entity.OrgaoEmissor[id=" + id + "]";
-    }
-
 }
