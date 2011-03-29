@@ -6,12 +6,14 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 
 /**
  *
  * @author Administrador
  */
 @MappedSuperclass
+@Table(name = "pessoa")
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @DiscriminatorColumn(name="tipo")
 public class Pessoa extends AbstractEntity {
