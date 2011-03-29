@@ -1,11 +1,8 @@
 package br.com.heldersa.giza.entity;
 
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -27,9 +24,6 @@ public class TipoEndereco extends AbstractEntity {
 
     @Column(name = "abreviacao", length = 50)
     private String abreviacao;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoEnderecoId")
-    private Collection<Endereco> enderecoCollection;
 
     public TipoEndereco() {
     }
@@ -58,14 +52,6 @@ public class TipoEndereco extends AbstractEntity {
 
     public void setAbreviacao(String abreviacao) {
         this.abreviacao = abreviacao;
-    }
-
-    public Collection<Endereco> getEnderecoCollection() {
-        return enderecoCollection;
-    }
-
-    public void setEnderecoCollection(Collection<Endereco> enderecoCollection) {
-        this.enderecoCollection = enderecoCollection;
     }
 
     @Override

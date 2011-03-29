@@ -1,13 +1,10 @@
 package br.com.heldersa.giza.entity;
 
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -25,9 +22,6 @@ public class TipoProduto extends AbstractEntity {
     @Basic(optional = false)
     @Column(name = "descricao", nullable = false, length = 255)
     private String descricao;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoProdutoId")
-    private Collection<Produto> produtoCollection;
 
     @JoinColumn(name = "unidade_medida_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
@@ -52,14 +46,6 @@ public class TipoProduto extends AbstractEntity {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public Collection<Produto> getProdutoCollection() {
-        return produtoCollection;
-    }
-
-    public void setProdutoCollection(Collection<Produto> produtoCollection) {
-        this.produtoCollection = produtoCollection;
     }
 
     public UnidadeMedida getUnidadeMedidaId() {
