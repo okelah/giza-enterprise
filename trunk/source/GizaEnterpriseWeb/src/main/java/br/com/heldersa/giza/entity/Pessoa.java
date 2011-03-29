@@ -1,20 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.heldersa.giza.entity;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 
 /**
  *
  * @author Administrador
  */
 @MappedSuperclass
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorColumn(name="tipo")
 public class Pessoa extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
@@ -22,15 +21,6 @@ public class Pessoa extends AbstractEntity {
     @Basic(optional = false)
     @Column(name = "tipo", nullable = false, length = 2)
     private String tipo;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa")
-    private PessoaFisica pessoaFisica;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa")
-    private PessoaJuridica pessoaJuridica;
-    
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private Cliente cliente;
 
     public Pessoa() {
     }
@@ -51,30 +41,6 @@ public class Pessoa extends AbstractEntity {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public PessoaFisica getPessoaFisica() {
-        return pessoaFisica;
-    }
-
-    public void setPessoaFisica(PessoaFisica pessoaFisica) {
-        this.pessoaFisica = pessoaFisica;
-    }
-
-    public PessoaJuridica getPessoaJuridica() {
-        return pessoaJuridica;
-    }
-
-    public void setPessoaJuridica(PessoaJuridica pessoaJuridica) {
-        this.pessoaJuridica = pessoaJuridica;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     @Override

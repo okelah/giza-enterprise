@@ -1,11 +1,8 @@
 package br.com.heldersa.giza.entity;
 
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -28,9 +25,6 @@ public class OrgaoEmissor extends AbstractEntity {
     @Basic(optional = false)
     @Column(name = "sigla", nullable = false, length = 10)
     private String sigla;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orgaoEmissorId")
-    private Collection<Rg> rgCollection;
 
     public OrgaoEmissor() {
     }
@@ -60,14 +54,6 @@ public class OrgaoEmissor extends AbstractEntity {
 
     public void setSigla(String sigla) {
         this.sigla = sigla;
-    }
-
-    public Collection<Rg> getRgCollection() {
-        return rgCollection;
-    }
-
-    public void setRgCollection(Collection<Rg> rgCollection) {
-        this.rgCollection = rgCollection;
     }
 
     @Override
