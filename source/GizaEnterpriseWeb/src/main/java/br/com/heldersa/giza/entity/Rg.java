@@ -1,23 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.heldersa.giza.entity;
 
-import java.io.Serializable;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -28,25 +15,9 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "rg", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"numero"})})
-@NamedQueries({
-    @NamedQuery(name = "Rg.findAll", query = "SELECT r FROM Rg r"),
-    @NamedQuery(name = "Rg.findById", query = "SELECT r FROM Rg r WHERE r.id = :id"),
-    @NamedQuery(name = "Rg.findByAtivo", query = "SELECT r FROM Rg r WHERE r.ativo = :ativo"),
-    @NamedQuery(name = "Rg.findByNumero", query = "SELECT r FROM Rg r WHERE r.numero = :numero"),
-    @NamedQuery(name = "Rg.findByVia", query = "SELECT r FROM Rg r WHERE r.via = :via")})
-public class Rg implements Serializable {
+public class Rg extends AbstractEntity{
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Basic(optional = false)
-    @Column(name = "ativo", nullable = false)
-    private boolean ativo;
 
     @Basic(optional = false)
     @Column(name = "numero", nullable = false, length = 255)
@@ -56,16 +27,13 @@ public class Rg implements Serializable {
     @Column(name = "via", nullable = false)
     private short via;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "rgId")
-    private PessoaFisica pessoaFisica;
-
     @JoinColumn(name = "estado_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private Estado estadoId;
+    private Estado estado;
 
     @JoinColumn(name = "orgao_emissor_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private OrgaoEmissor orgaoEmissorId;
+    private OrgaoEmissor orgaoEmissor;
 
     public Rg() {
     }
@@ -79,22 +47,6 @@ public class Rg implements Serializable {
         this.ativo = ativo;
         this.numero = numero;
         this.via = via;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
     }
 
     public String getNumero() {
@@ -113,28 +65,21 @@ public class Rg implements Serializable {
         this.via = via;
     }
 
-    public PessoaFisica getPessoaFisica() {
-        return pessoaFisica;
+
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setPessoaFisica(PessoaFisica pessoaFisica) {
-        this.pessoaFisica = pessoaFisica;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
-    public Estado getEstadoId() {
-        return estadoId;
+    public OrgaoEmissor getOrgaoEmissor() {
+        return orgaoEmissor;
     }
 
-    public void setEstadoId(Estado estadoId) {
-        this.estadoId = estadoId;
-    }
-
-    public OrgaoEmissor getOrgaoEmissorId() {
-        return orgaoEmissorId;
-    }
-
-    public void setOrgaoEmissorId(OrgaoEmissor orgaoEmissorId) {
-        this.orgaoEmissorId = orgaoEmissorId;
+    public void setOrgaoEmissor(OrgaoEmissor orgaoEmissor) {
+        this.orgaoEmissor = orgaoEmissor;
     }
 
     @Override
@@ -156,10 +101,4 @@ public class Rg implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "br.com.heldersa.giza.entity.Rg[id=" + id + "]";
-    }
-
 }
