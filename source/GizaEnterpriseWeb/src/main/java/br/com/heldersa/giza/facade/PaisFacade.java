@@ -7,6 +7,7 @@ package br.com.heldersa.giza.facade;
 import br.com.heldersa.giza.entity.Pais;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -35,8 +36,9 @@ public class PaisFacade extends AbstractFacade<Pais> {
     public List<Pais> findByFiltros(String nome, String sigla, Boolean ativo) {
 
         Map<String, Object> parametros = new TreeMap<String, Object>();
-        StringBuilder jpql = new StringBuilder("SELECT pais FROM Pais pais");
+        StringBuilder jpql = new StringBuilder();
 
+        jpql.append("SELECT pais FROM ").append(Pais.class.getName()).append(" AS pais");
         jpql.append(" WHERE 1=1");
         if (nome != null && !nome.isEmpty()) {
             jpql.append(" AND lower(pais.nome) like lower(:nome)");
@@ -54,9 +56,9 @@ public class PaisFacade extends AbstractFacade<Pais> {
         }
 
         Query query = getEntityManager().createQuery(jpql.toString());
-        for (String parametro : parametros.keySet()) {
-            Object object = parametros.get(parametro);
-            query.setParameter(parametro, object);
+
+        for (Entry<String, Object> parametro : parametros.entrySet()) {
+            query.setParameter(parametro.getKey(), parametro.getValue());
         }
 
         return query.getResultList();
