@@ -9,6 +9,8 @@ import br.com.heldersa.giza.ejb.entity.Pais;
 
 /**
  * Session Bean implementation class PaisFacade
+ * 
+ * @author helder.jaspion
  */
 @Stateless
 @LocalBean
