@@ -11,14 +11,11 @@ import javax.persistence.MappedSuperclass;
 
 /**
  * 
- * @author Administrador
+ * @author helder.jaspion
  */
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1410521469535538086L;
 
 	@Id

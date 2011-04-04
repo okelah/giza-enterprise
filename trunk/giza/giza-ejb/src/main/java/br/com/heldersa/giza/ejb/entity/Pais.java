@@ -11,10 +11,13 @@ import javax.persistence.UniqueConstraint;
 /**
  * The persistent class for the pais database table.
  * 
+ * @author helder.jaspion
  */
 @Entity
-@Table(name = "pais", uniqueConstraints = { @UniqueConstraint(columnNames = { "nome" }) })
+@Table(name = "pais", uniqueConstraints = { @UniqueConstraint(
+		columnNames = { "nome" }) })
 public class Pais extends AbstractEntity implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Basic(optional = false)
