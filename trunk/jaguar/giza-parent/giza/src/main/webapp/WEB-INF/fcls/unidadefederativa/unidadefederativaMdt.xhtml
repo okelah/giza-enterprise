@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<plcf:tabela tituloChave="unidadefederativa.mestre.titulo.comp" aoSair="comutaAbaFacelets(1)"> 
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.id"/>  
+					<plcf:oid id="id" ajudaChave="ajuda.id"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.nome"/>  
+					<plcf:texto id="nome" value="#{unidadefederativa.nome}" ajudaChave="ajuda.nome" tamanho="60"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo tituloChave="label.sigla"/>  
+					<plcf:texto id="sigla" value="#{unidadefederativa.sigla}" ajudaChave="ajuda.sigla"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula columnSpan="3"> 
+					<plcf:titulo tituloChave="label.pais"/>  
+					<plcf:vinculado id="pais" value="#{unidadefederativa.pais}" propSelPop="pais" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.hsa.giza.entity.PaisEntity" actionSel="paissel" modal="S" ajudaChave="ajuda.pais" onkeydown="selecionaPorTecla(event,this);"/> 
+				</plcf:celula> 
+			</plcf:linha> 
+		</plcf:tabela> 
+	</ui:composition> 
+</html>
