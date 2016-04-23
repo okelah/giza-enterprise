@@ -1,0 +1,1 @@
+Enterprise web application for store management
